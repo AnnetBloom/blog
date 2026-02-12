@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\PostApiController;
+
 use App\Http\Controllers\ProductController;
 
 Route::get('/user', function (Request $request) {
@@ -10,3 +12,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource('products', ProductController::class);
+
+Route::middleware('auth:sanctum')->group(function() {
+    Route::apiResource('posts', PostApiController::class);
+});
